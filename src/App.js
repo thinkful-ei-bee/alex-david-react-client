@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import AddBookmark from './addBookmark/addBookmark';
 import BookmarkApp from './bookmarkApp/bookmarkApp';
+import config from './config';
 
-require('dotenv').config();
 
 class App extends Component {
 
@@ -29,11 +29,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:8000/bookmarks';
+    const url = 'http://localhost:8000/api/bookmarks';
     const options = {
       method: 'GET',
       headers: {
-        "Authorization": "Bearer ${process.env.API_TOKEN}",
+        "Authorization": `Bearer ${config.API_TOKEN}`,
         "Content-Type": "application/json"
       }
     };
@@ -58,6 +58,12 @@ class App extends Component {
         });
       });
 
+  }
+
+  editBookmark = editedBookmark =>{
+    this.setState({
+      bookmarks: this.state.bookmarks.map(bookmark =>bookmark.id!==editedBookmark.id ? bookmark:editedBookmark)
+    })
   }
 
   render() {

@@ -40,14 +40,14 @@ class AddBookmark extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const bookmark = (({title, url, description, rating}) => ({title, url, description, rating}))(this.state);
-    const url ='http://localhost:8000/bookmarks';
-    console.log(config.API_TOKEN)
-;    const options = {
+    const url ='http://localhost:8000/api/bookmarks';
+    //console.log(config.API_TOKEN)
+    const options = {
       method: 'POST',
       body: JSON.stringify(bookmark),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.API_TOKEN}`
+        "Authorization": `Bearer ${config.API_TOKEN}`
       }
     };
 
